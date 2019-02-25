@@ -5,7 +5,7 @@ public class ReadNews {
         NewsFeedParser parser = new NewsFeedParser(
                 "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml");
         Feed feed = parser.readFeed();
-        System.out.println(feed);
+        // System.out.println(feed);
         for (FeedMessage message : feed.getMessages()) {
             System.out.println(message);
         }

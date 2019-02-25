@@ -2,7 +2,7 @@ package com.marketing.news.web;
 
 public class FeedMessage {
     String title;
-    String description;
+  //  String description;
     String link;
     String guid;
 
@@ -10,17 +10,24 @@ public class FeedMessage {
         return title;
     }
 
+//    public FeedMessage(String title, String link, String guid) {
+//        this.title = title;
+//     //   this.description = description;
+//        this.link = link;
+//        this.guid = guid;
+//    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
 
     public String getLink() {
         return link;
@@ -40,8 +47,7 @@ public class FeedMessage {
 
     @Override
     public String toString() {
-        return "FeedMessage [title=" + title + ", description=" + description
-                + ", link=" + link + ", guid=" + guid
+        return "FeedMessage [title=" + title + ", link=" + link + ", guid=" + guid
                 + "]";
     }
 }

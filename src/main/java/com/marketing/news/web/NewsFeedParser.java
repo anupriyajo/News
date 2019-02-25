@@ -1,23 +1,17 @@
 package com.marketing.news.web;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.events.Characters;
-import javax.xml.stream.events.XMLEvent;
+
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.FeedException;
+import com.rometools.rome.io.SyndFeedInput;
+import com.rometools.rome.io.XmlReader;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.xml.stream.XMLStreamException;
-import java.io.InputStream;
+
 
 public class NewsFeedParser {
-    static final String TITLE = "title";
-    static final String DESCRIPTION = "description";
-    static final String CHANNEL = "channel";
-    static final String LANGUAGE = "language";
-    static final String COPYRIGHT = "copyright";
-    static final String LINK = "link";
-    static final String ITEM = "item";
-    static final String GUID = "guid";
 
     final URL url;
 
@@ -32,88 +26,22 @@ public class NewsFeedParser {
     public Feed readFeed() {
         Feed feed = null;
         try {
-            boolean isFeedHeader = true;
-            // Set header values intial to the empty string
-            String description = "";
-            String title = "";
-            String link = "";
-            String language = "";
-            String copyright = "";
-            String guid = "";
-
-            // First create a new XMLInputFactory
-            XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-            // Setup a new eventReader
-            InputStream in = read();
-            XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
-            // read the XML document
-            while (eventReader.hasNext()) {
-                XMLEvent event = eventReader.nextEvent();
-                if (event.isStartElement()) {
-                    String localPart = event.asStartElement().getName()
-                            .getLocalPart();
-                    switch (localPart) {
-                        case ITEM:
-                            if (isFeedHeader) {
-                                isFeedHeader = false;
-                                feed = new Feed(title, link, description, language,
-                                        copyright);
-                            }
-                          //  event = eventReader.nextEvent();
-                            break;
-                        case TITLE:
-                            title = getCharacterData(event, eventReader);
-                            break;
-                        case DESCRIPTION:
-                            description = getCharacterData(event, eventReader);
-                            break;
-                        case LINK:
-                            link = getCharacterData(event, eventReader);
-                            break;
-                        case GUID:
-                            guid = getCharacterData(event, eventReader);
-                            break;
-                        case LANGUAGE:
-                            language = getCharacterData(event, eventReader);
-                            break;
-                        case COPYRIGHT:
-                            copyright = getCharacterData(event, eventReader);
-                            break;
-                    }
-                } else if (event.isEndElement()) {
-                    if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
-                        FeedMessage message = new FeedMessage();
-                        message.setDescription(description);
-                        message.setGuid(guid);
-                        message.setLink(link);
-                        message.setTitle(title);
-                        feed.getMessages().add(message);
-                       // event = eventReader.nextEvent();
-                        continue;
-                    }
-                }
+            feed = new Feed();
+            SyndFeedInput input = new SyndFeedInput();
+            SyndFeed syndFeed = input.build(new XmlReader(url));
+            feed.setTitle(syndFeed.getTitle());
+            for (SyndEntry entry : syndFeed.getEntries()) {
+                FeedMessage message = new FeedMessage();
+                message.setTitle(entry.getTitle());
+                message.setLink(entry.getLink());
+                message.setGuid(entry.getUri());
+                feed.getMessages().add(message);
             }
-        } catch (XMLStreamException e) {
-            throw new RuntimeException(e);
+        } catch (FeedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return feed;
-    }
-
-    private String getCharacterData(XMLEvent event, XMLEventReader eventReader)
-            throws XMLStreamException {
-        String result = "";
-        event = eventReader.nextEvent();
-        if (event instanceof Characters) {
-            result = event.asCharacters().getData();
-        }
-        return result;
-    }
-
-    private InputStream read() {
-        try {
-            return url.openStream();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
