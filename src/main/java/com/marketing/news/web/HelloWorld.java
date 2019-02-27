@@ -6,7 +6,7 @@ import org.json.XML;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.bson.Document;
+
 import java.io.InputStream;
 import java.net.URL;
 
@@ -42,8 +42,8 @@ public class HelloWorld {
         return jsonPrettyPrintString;
     }
 
-    private void insertToMongo(String jsonString){
-        Document doc = Document.parse(jsonString);
-        mongoTemplate.insert(doc, "foo");
-    }
+//    private void insertToMongo(String jsonString){
+//        Document doc = Document.parse(jsonString);
+//        mongoTemplate.insert(doc, "foo");
+//    }
 }
