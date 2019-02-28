@@ -5,6 +5,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 public class DatabaseFeed {
+    public MongoClient getMongoClient() {
+        return mongoClient;
+    }
+
     private MongoClient mongoClient;
 
     public DatabaseFeed() {
