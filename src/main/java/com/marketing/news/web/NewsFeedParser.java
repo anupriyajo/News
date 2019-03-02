@@ -1,5 +1,7 @@
 package com.marketing.news.web;
 
+import com.marketing.news.web.models.Feed;
+import com.marketing.news.web.models.NewsItem;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.rometools.rome.feed.synd.SyndEntry;
@@ -39,7 +41,7 @@ public class NewsFeedParser {
             feed.setTitle(syndFeed.getTitle());
             DBCollection dbCollection = databaseFeed.getCollection("newsFeed");
             for (SyndEntry entry : syndFeed.getEntries()) {
-                FeedMessage message = new FeedMessage();
+                NewsItem message = new NewsItem();
                 BasicDBObject data = new BasicDBObject();
                 data.append("title", entry.getTitle());
                 if(dbCollection.findOne(data) != null){

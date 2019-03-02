@@ -12,7 +12,7 @@ public class DatabaseFeed {
     private MongoClient mongoClient;
 
     public DatabaseFeed() {
-        this.mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+        this.mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27018"));
     }
 
     public DBCollection getCollection(String name){

@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  api:
+    build: .
+    restart: always
+    container_name: news-feed
+    ports:
+      - 8001: 8080
+    working_dir: /app
+    depends_on:
+      - database
+
+  database:
+    image: mongo:latest
+    container_name: news-feed-mongodb
+    ports:  # for demo/debug purpose only
+      - 27018:27017
+    volumes:
+      - $HOME/data/news-feed-mongodb-data: ./data/db
+      - $HOME/data/news-feed-mongodb-bkp: ./data/bkp
+    restart: always

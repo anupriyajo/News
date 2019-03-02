@@ -1,6 +1,9 @@
-package com.marketing.news.web;
+package com.marketing.news.web.models;
 
-public class FeedMessage {
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "news_item")
+public class NewsItem {
     String title;
   //  String description;
     String link;

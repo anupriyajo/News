@@ -1,4 +1,4 @@
-package com.marketing.news.web;
+package com.marketing.news.web.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +28,14 @@ public class Feed {
         this.copyright = copyright;
     }
 
-    public void setEntries(List<FeedMessage> entries) {
+    public void setEntries(List<NewsItem> entries) {
         this.entries = entries;
     }
 
     String language;
      String copyright;
 
-    List<FeedMessage> entries = new ArrayList<>();
+    List<NewsItem> entries = new ArrayList<>();
 
 //    public Feed(String title, String link, String description, String language, String copyright) {
 //        this.title = title;
@@ -65,7 +65,7 @@ public class Feed {
         return copyright;
     }
 
-    public List<FeedMessage> getMessages() {
+    public List<NewsItem> getMessages() {
         return entries;
     }
 
