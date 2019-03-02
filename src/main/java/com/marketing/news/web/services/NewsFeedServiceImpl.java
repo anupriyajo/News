@@ -56,8 +56,8 @@ public class NewsFeedServiceImpl implements NewsFeedService {
                     }
                 }
                 newsItemRepository.save(newsItem);
+                System.out.println("saving: " + newsItem.toString());
             }
-            System.out.println("saving: " + newsItem.toString());
             count = syndFeed.getEntries().size();
         } catch (FeedException | IOException exception) {
             LOG.error(exception.toString());
