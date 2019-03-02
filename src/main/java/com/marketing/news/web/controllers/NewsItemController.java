@@ -2,6 +2,7 @@ package com.marketing.news.web.controllers;
 
 import com.marketing.news.web.models.NewsItem;
 import com.marketing.news.web.models.NewsItemRating;
+import com.marketing.news.web.models.TopNewsItem;
 import com.marketing.news.web.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,8 @@ public class NewsItemController {
 
     @Autowired
     private NewsService newsService;
-/*
-    @GetMapping("/{id}/rating")
-    public String getRating(@PathParam("id") String newsItemId, @RequestParam int rating) {
 
-        System.out.println(newsItemId + " " + rating + " ");
-        return "done:" + newsFeedService.rateFeed(newsItemId, rating);
-    }
-*/
+    @CrossOrigin
     @GetMapping
     public List<NewsItem> getAllNews() {
         return newsService.getAllNews();
@@ -29,7 +24,11 @@ public class NewsItemController {
 
     @PutMapping(path = "/{id}/rating")
     public NewsItemRating rateNews(@PathVariable("id") String newsItemId, @RequestParam int rating, @RequestHeader String userId) {
-
         return newsService.rateFeed(newsItemId, rating, userId);
+    }
+
+    @GetMapping(path = "/popular")
+    public List<TopNewsItem> getPopularNews() {
+        return newsService.getPopularNews();
     }
 }

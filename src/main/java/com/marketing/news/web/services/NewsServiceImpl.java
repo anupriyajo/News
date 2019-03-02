@@ -3,9 +3,11 @@ package com.marketing.news.web.services;
 import com.marketing.news.web.models.NewsItem;
 import com.marketing.news.web.models.NewsItemRating;
 import com.marketing.news.web.models.NewsItemRatingCalculation;
+import com.marketing.news.web.models.TopNewsItem;
 import com.marketing.news.web.repositories.NewsItemRatingCalculationRepository;
 import com.marketing.news.web.repositories.NewsItemRatingRepository;
 import com.marketing.news.web.repositories.NewsItemRepository;
+import com.marketing.news.web.repositories.TopNewsItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ public class NewsServiceImpl implements NewsService {
 
     @Autowired
     private NewsItemRatingCalculationRepository newsItemRatingCalculationRepository;
+
+    @Autowired
+    private TopNewsItemRepository topNewsItemRepository;
 
     @Override
     public List<NewsItem> getAllNews() {
@@ -40,6 +45,11 @@ public class NewsServiceImpl implements NewsService {
         System.out.println("rating: " + newsItemRating.toString());
         newsItemRatingRepository.save(newsItemRating);
         return newsItemRating;
+    }
+
+    @Override
+    public List<TopNewsItem> getPopularNews() {
+        return topNewsItemRepository.findAll();
     }
 
     private void updateRatingCalculationTable(String newsItemId, int rating) {
