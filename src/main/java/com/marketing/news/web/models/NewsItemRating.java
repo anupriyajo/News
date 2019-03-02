@@ -5,29 +5,29 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "rating")
 public class NewsItemRating {
 
-    private String user;
+    private String userId;
     private int rating;
-    private String id;
+    private String newsItemId;
 
-    public String getId() {
-        return id;
+    public String getNewsItemId() {
+        return newsItemId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNewsItemId(String newsItemId) {
+        this.newsItemId = newsItemId;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
     @Override
     public String toString() {
-        return "NewsItemRating [user=" + user + ", rating=" + rating + ", id=" + id + "]";
+        return "NewsItemRating [userId=" + userId + ", rating=" + rating + ", newsItemId=" + newsItemId + "]";
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getRating() {
