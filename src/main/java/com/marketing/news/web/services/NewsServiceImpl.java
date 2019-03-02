@@ -2,6 +2,8 @@ package com.marketing.news.web.services;
 
 import com.marketing.news.web.models.NewsItem;
 import com.marketing.news.web.models.NewsItemRating;
+import com.marketing.news.web.models.NewsItemRatingCalculation;
+import com.marketing.news.web.repositories.NewsItemRatingCalculationRepository;
 import com.marketing.news.web.repositories.NewsItemRatingRepository;
 import com.marketing.news.web.repositories.NewsItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsItemRatingRepository newsItemRatingRepository;
 
+    @Autowired
+    private NewsItemRatingCalculationRepository newsItemRatingCalculationRepository;
+
     @Override
     public List<NewsItem> getAllNews() {
         return newsItemRepository.findAll();
@@ -28,9 +33,21 @@ public class NewsServiceImpl implements NewsService {
         newsItemRating.setUserId(userId);
         newsItemRating.setRating(rating);
         newsItemRating.setNewsItemId(newsItemId);
+
+        // adding rating to calculation table
+
+        updateRatingCalculationTable(newsItemId, rating);
         System.out.println("rating: " + newsItemRating.toString());
         newsItemRatingRepository.save(newsItemRating);
         return newsItemRating;
+    }
+
+    private void updateRatingCalculationTable(String newsItemId, int rating) {
+         NewsItemRatingCalculation newsItemRatingCalculation = newsItemRatingCalculationRepository.findById(newsItemId).orElse(new NewsItemRatingCalculation());
+         newsItemRatingCalculation.setTotalUsersRated(newsItemRatingCalculation.getTotalUsersRated() + 1);
+         newsItemRatingCalculation.setTotalRating(newsItemRatingCalculation.getTotalRating() + rating);
+         newsItemRatingCalculationRepository.save(newsItemRatingCalculation);
+         System.out.println("rating updated : " + newsItemRatingCalculation.toString());
     }
 
 }

@@ -15,9 +15,9 @@ public class NewsFeedController {
     private NewsFeedService newsFeedService;
 
     @PostMapping
-    public String saveFeed(@RequestParam String uri) {
+    public int saveFeed(@RequestParam String uri) {
 
-        return "done:" + newsFeedService.saveFeed(uri);
+        return newsFeedService.saveFeed(uri);
     }
 
 }

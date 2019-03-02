@@ -2,7 +2,7 @@ package com.marketing.news.web.models;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "rating")
+@Document(collection = "news_item_rating")
 public class NewsItemRating {
 
     private String userId;

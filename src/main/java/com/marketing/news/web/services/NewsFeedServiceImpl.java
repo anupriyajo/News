@@ -48,11 +48,8 @@ public class NewsFeedServiceImpl implements NewsFeedService {
 
                 List<Element> foreignMarkup = entry.getForeignMarkup();
                 for( Element element :foreignMarkup) {
-                    String property = element.getName();
-                    switch (property) {
-                        case "content":
+                    if (element.getName() == "content") {
                             newsItem.setMediaContent(element.getAttributeValue("url"));
-                            break;
                     }
                 }
                 newsItemRepository.save(newsItem);

@@ -14,3 +14,5 @@ Task breakdown
     
     assumption:
     //one time cron for setting initial users
+    
+    // best rated is calcuted on average(total rating/no of users rated) not the total score
