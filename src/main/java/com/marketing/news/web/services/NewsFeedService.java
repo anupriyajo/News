@@ -1,5 +1,6 @@
 package com.marketing.news.web.services;
 
 public interface NewsFeedService {
-    public int saveFeed(String uri);
+    int saveFeed(String uri);
+    int rateFeed(String id, int rating, String user);
 }

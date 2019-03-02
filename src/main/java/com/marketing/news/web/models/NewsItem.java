@@ -4,10 +4,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "news_item")
 public class NewsItem {
-    String title;
+    private String title;
   //  String description;
-    String link;
-    String guid;
+    private String link;
+    private String guid;
 
     public String getTitle() {
         return title;

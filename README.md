@@ -11,3 +11,6 @@ Task breakdown
     // 6. readme task breakdown
     // 5.tests
     // 7. swagger
+    
+    assumption:
+    //one time cron for setting initial users

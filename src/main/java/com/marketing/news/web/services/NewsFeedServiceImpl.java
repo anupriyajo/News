@@ -1,6 +1,8 @@
 package com.marketing.news.web.services;
 
 import com.marketing.news.web.models.NewsItem;
+import com.marketing.news.web.models.NewsItemRating;
+import com.marketing.news.web.repositories.NewsItemRatingRepository;
 import com.marketing.news.web.repositories.NewsItemRepository;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -21,6 +23,9 @@ public class NewsFeedServiceImpl implements NewsFeedService {
 
     @Autowired
     private NewsItemRepository newsItemRepository;
+
+    @Autowired
+    private NewsItemRatingRepository newsItemRatingRepository;
 
     @Override
     public int saveFeed(String feedUrl) {
@@ -44,11 +49,20 @@ public class NewsFeedServiceImpl implements NewsFeedService {
                 newsItemRepository.save(newsItem);
             }
             count = syndFeed.getEntries().size();
-        } catch (FeedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FeedException | IOException exception) {
+            LOG.error(exception.toString());
         }
         return count;
+    }
+
+    @Override
+    public int rateFeed(String id, int rating, String user) {
+        NewsItemRating newsItemRating = new NewsItemRating();
+        newsItemRating.setUser(user);
+        newsItemRating.setRating(rating);
+        newsItemRating.setId(id);
+        System.out.println("rating: " + newsItemRating.toString());
+        newsItemRatingRepository.save(newsItemRating);
+        return rating;
     }
 }
