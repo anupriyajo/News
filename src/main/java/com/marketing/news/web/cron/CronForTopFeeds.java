@@ -1,4 +1,4 @@
-package com.marketing.news.web;
+package com.marketing.news.web.cron;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

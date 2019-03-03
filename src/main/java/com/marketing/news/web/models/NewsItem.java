@@ -1,11 +1,15 @@
 package com.marketing.news.web.models;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Document(collection = "news_item")
 public class NewsItem {
+
+    @Id
+    private String newsItemId;
     private String title;
     private String description;
     private String author;
@@ -13,6 +17,14 @@ public class NewsItem {
     private String link;
     private String guid;
     private String mediaContent;
+
+    public String getNewsItemId() {
+        return newsItemId;
+    }
+
+    public void setNewsItemId(String newsItemId) {
+        this.newsItemId = newsItemId;
+    }
 
     public String getMediaContent() {
         return mediaContent;

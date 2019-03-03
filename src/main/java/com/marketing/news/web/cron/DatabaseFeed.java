@@ -1,4 +1,4 @@
-package com.marketing.news.web;
+package com.marketing.news.web.cron;
 
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
