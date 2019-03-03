@@ -56,6 +56,7 @@ public class NewsServiceImpl implements NewsService {
          newsItemRatingCalculation.setTotalUsersRated(newsItemRatingCalculation.getTotalUsersRated() + 1);
          newsItemRatingCalculation.setTotalRating(newsItemRatingCalculation.getTotalRating() + rating);
          newsItemRatingCalculation.setNewsItemId(newsItemId);
+         newsItemRatingCalculation.setAverageRating(newsItemRatingCalculation.getTotalRating() / newsItemRatingCalculation.getTotalUsersRated());
          newsItemRatingCalculationRepository.save(newsItemRatingCalculation);
          System.out.println("rating updated : " + newsItemRatingCalculation.toString());
     }
