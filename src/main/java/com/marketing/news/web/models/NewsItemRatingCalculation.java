@@ -5,17 +5,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "news_item_rating_calculation")
 public class NewsItemRatingCalculation {
-    private String totalUsersRated;
-    private int totalRating;
 
     @Id
     private String newsItemId;
+    private int totalUsersRated;
+    private int totalRating;
 
-    public String getTotalUsersRated() {
+    public int getTotalUsersRated() {
         return totalUsersRated;
     }
 
-    public void setTotalUsersRated(String totalUsersRated) {
+    public void setTotalUsersRated(int totalUsersRated) {
         this.totalUsersRated = totalUsersRated;
     }
 

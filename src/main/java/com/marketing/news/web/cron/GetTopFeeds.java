@@ -1,9 +1,17 @@
 package com.marketing.news.web.cron;
 
+import com.marketing.news.web.models.NewsItemRatingCalculation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+
+import java.util.List;
+
 public class GetTopFeeds {
 
-//    @Autowired
-//    static MongoTemplate mongoTemplate;
+    @Autowired
+    static MongoTemplate mongoTemplate;
 
     // make cron
     // put top 5 id in table
@@ -19,10 +27,12 @@ public class GetTopFeeds {
 //        List<NewsItemRatingCalculation> mappedResult = results.getMappedResults();
 //
 //        System.out.println("findOneById=" + results.getMappedResults());
-//       Query query = new Query();
-//        query.with(new Sort(Sort.Direction.DESC, "rating"));
-//        query.limit(3);
-//        List<TopNewsItem> users = mongoTemplate.find(query,TopNewsItem.class);
+
+Query query = new Query();
+query.with(new Sort(Sort.Direction.DESC, "rating"));
+query.limit(3);
+List<NewsItemRatingCalculation> top = mongoTemplate.find(query, NewsItemRatingCalculation.class);
+        System.out.println("findOneById=" + top.toString());
 //        DatabaseFeed databaseFeed = new DatabaseFeed();
 //        //check if exists db
 //        MongoCollection<Document> dbCollection = databaseFeed.getMongoClient().getDatabase("feedDb").getCollection("feedRating");

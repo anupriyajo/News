@@ -40,7 +40,6 @@ public class NewsServiceImpl implements NewsService {
         newsItemRating.setNewsItemId(newsItemId);
 
         // adding rating to calculation table
-
         updateRatingCalculationTable(newsItemId, rating);
         System.out.println("rating: " + newsItemRating.toString());
         newsItemRatingRepository.save(newsItemRating);
@@ -56,6 +55,7 @@ public class NewsServiceImpl implements NewsService {
          NewsItemRatingCalculation newsItemRatingCalculation = newsItemRatingCalculationRepository.findById(newsItemId).orElse(new NewsItemRatingCalculation());
          newsItemRatingCalculation.setTotalUsersRated(newsItemRatingCalculation.getTotalUsersRated() + 1);
          newsItemRatingCalculation.setTotalRating(newsItemRatingCalculation.getTotalRating() + rating);
+         newsItemRatingCalculation.setNewsItemId(newsItemId);
          newsItemRatingCalculationRepository.save(newsItemRatingCalculation);
          System.out.println("rating updated : " + newsItemRatingCalculation.toString());
     }
