@@ -19,7 +19,20 @@ ui: http://localhost:3000
 
 api: http://localhost:9000/api
 
-To clean up:
+Note: initially UI will be empty as no news feed is uploaded. To upload the news feeds please run the below commands
+
+```
+curl -X POST \
+  'http://localhost:9000/api/feed?uri=http://rss.nytimes.com/services/xml/rss/nyt/Europe.xml' \
+  -H 'cache-control: no-cache'
+```
+```
+curl -X POST \
+  'http://localhost:9000/api/feed?uri=http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml' \
+  -H 'cache-control: no-cache'
+```
+
+To clean up (cleans up only containers, docker images and data are persisted):
 ```
 # chmod +x cleanup.sh
 # ./cleanup.sh
@@ -70,6 +83,7 @@ Improvements/Assumptions:
  11. Cashing the top 5 feeds in ui layer for 5 mins can be done. Invalidation the cache and hitting the api can be done as per business requirements.
  12. Swagger can be added
  13. API base uri is hard coded in the UI layer, and expects it in `localhost:9000`
+ 14. Data is persisted by docker volumes at location ./data
       
 Architectural decisions
  1. no sql is used as it is faster and more cost effective along-with greater flexibility for unstructured data
