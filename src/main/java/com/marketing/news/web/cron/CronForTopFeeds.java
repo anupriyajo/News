@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,9 +57,10 @@ public class CronForTopFeeds {
 
     private  List<String> getTopFeedsIds(int count) {
         List<String> topFeedIds = new ArrayList<>();
-        List<NewsItemRatingCalculation> newsItemRatingCalculations= newsItemRatingCalculationRepository.findAll(new Sort(Sort.Direction.DESC, "averageRating"));
+        List<NewsItemRatingCalculation> newsItemRatingCalculations =
+                newsItemRatingCalculationRepository.findAll(new Sort(Sort.Direction.DESC, "averageRating"));
         for (int i = 0; i < count ; i++ ) {
-            topFeedIds.add(newsItemRatingCalculations.get(i).getNewsItemId());;
+            topFeedIds.add(newsItemRatingCalculations.get(i).getNewsItemId());
         }
         return topFeedIds;
     }

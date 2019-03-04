@@ -6,7 +6,6 @@ import com.marketing.news.web.models.TopNewsItem;
 import com.marketing.news.web.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

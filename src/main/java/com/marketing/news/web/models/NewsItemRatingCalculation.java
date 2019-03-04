@@ -43,4 +43,10 @@ public class NewsItemRatingCalculation {
     public void setNewsItemId(String newsItemId) {
         this.newsItemId = newsItemId;
     }
+
+    @Override
+    public String toString() {
+        /*TODO Can add all attributes*/
+        return "NewsItemRating [newsItemId=" + newsItemId + ", totalUsersRated=" + totalUsersRated + ", totalRating=" + totalRating + "]";
+    }
 }

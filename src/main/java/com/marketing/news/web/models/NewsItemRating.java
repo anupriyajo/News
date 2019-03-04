@@ -23,6 +23,7 @@ public class NewsItemRating {
 
     @Override
     public String toString() {
+        /*TODO Can add all attributes*/
         return "NewsItemRating [userId=" + userId + ", rating=" + rating + ", newsItemId=" + newsItemId + "]";
     }
 

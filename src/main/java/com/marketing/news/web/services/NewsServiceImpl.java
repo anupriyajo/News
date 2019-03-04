@@ -10,7 +10,6 @@ import com.marketing.news.web.repositories.NewsItemRepository;
 import com.marketing.news.web.repositories.TopNewsItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

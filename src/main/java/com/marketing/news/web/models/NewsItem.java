@@ -2,7 +2,6 @@ package com.marketing.news.web.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 import java.util.List;
 
@@ -121,6 +120,7 @@ public class NewsItem {
 
     @Override
     public String toString() {
+        /*TODO Can add all attributes*/
         return "FeedMessage [title=" + title + ", link=" + link + ", guid=" + guid
                 + "]";
     }
