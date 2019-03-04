@@ -22,11 +22,13 @@ public class NewsItemController {
         return newsService.getAllNews();
     }
 
+    @CrossOrigin
     @PutMapping(path = "/{id}/rating")
     public NewsItemRating rateNews(@PathVariable("id") String newsItemId, @RequestParam int rating, @RequestHeader String userId) {
         return newsService.rateFeed(newsItemId, rating, userId);
     }
 
+    @CrossOrigin
     @GetMapping(path = "/popular")
     public List<TopNewsItem> getPopularNews() {
         return newsService.getPopularNews();

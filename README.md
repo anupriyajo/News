@@ -15,7 +15,11 @@ Task breakdown
     assumption:
     //one time cron for setting initial users
     
+    meta data can be saved
+    ideally cron should be in different docker container
     
+    initiallt top news is empty . requiremnt
+    if more than 5 are top rated can be handled accordingly
     ************************************************
     architectural desicion
     1.no sql reason
@@ -29,7 +33,8 @@ Task breakdown
       1. rating calculation is kept out of cron
       2. kept top 5 in  a table for faster processing
       
-      improvements
+     functionality improvements
+     i have put a console log for saving rating. i thought of using a button but since i did not have time to show a reposne of saved sa
       
       casshing the top 5 in ui layer for 5 mins than invalidation the cache and hitting as per business requirements 
     
