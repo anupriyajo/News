@@ -31,15 +31,29 @@ public class CronForTopFeeds {
         List<String> topFeedIds = getTopFeedsIds(5);
         setTopFeeds(topFeedIds);
     }
+
     private void setTopFeeds(List<String>  topFeedIds) {
         List<NewsItem> newsItems = newsItemRepository.findByIds(topFeedIds);
         topNewsItemRepository.deleteAll();
         for(NewsItem newsItem :newsItems){
             TopNewsItem topNewsItem = new TopNewsItem();
-            topNewsItem.setAuthor(newsItem.getAuthor());
+            copyBeans(newsItem, topNewsItem);
             topNewsItemRepository.save(topNewsItem);
-            System.out.println(topNewsItem.toString());
         }
+    }
+
+    private void copyBeans(NewsItem newsItem, TopNewsItem topNewsItem) {
+        topNewsItem.setAtomLink(newsItem.getAtomLink());
+        topNewsItem.setCategories(newsItem.getCategories());
+        topNewsItem.setDescription(newsItem.getDescription());
+        topNewsItem.setGuid(newsItem.getGuid());
+        topNewsItem.setTitle(newsItem.getTitle());
+        topNewsItem.setAuthor(newsItem.getAuthor());
+        topNewsItem.setMediaContent(newsItem.getMediaContent());
+        topNewsItem.setMediaCredit(newsItem.getMediaCredit());
+        topNewsItem.setLink(newsItem.getLink());
+        topNewsItem.setPublishedDate(newsItem.getPublishedDate());
+        topNewsItem.setMediaDescription(newsItem.getMediaDescription());
     }
 
     private  List<String> getTopFeedsIds(int count) {

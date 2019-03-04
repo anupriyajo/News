@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document(collection = "news_item")
 public class NewsItem {
@@ -17,6 +18,42 @@ public class NewsItem {
     private String link;
     private String guid;
     private String mediaContent;
+    private String mediaDescription;
+    private String atomLink;
+    private String mediaCredit;
+    private List<String> categories;
+
+    public String getMediaDescription() {
+        return mediaDescription;
+    }
+
+    public void setMediaDescription(String mediaDescription) {
+        this.mediaDescription = mediaDescription;
+    }
+
+    public String getAtomLink() {
+        return atomLink;
+    }
+
+    public void setAtomLink(String atomLink) {
+        this.atomLink = atomLink;
+    }
+
+    public String getMediaCredit() {
+        return mediaCredit;
+    }
+
+    public void setMediaCredit(String mediaCredit) {
+        this.mediaCredit = mediaCredit;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
 
     public String getNewsItemId() {
         return newsItemId;

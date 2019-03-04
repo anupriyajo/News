@@ -14,7 +14,7 @@ Task breakdown
     
     assumption:
     //one time cron for setting initial users
-    
+    // Not checking for duplicity of data. Can be done if needed
     meta data can be saved
     ideally cron should be in different docker container
     

@@ -2,6 +2,7 @@ package com.marketing.news.web.services;
 
 import com.marketing.news.web.models.NewsItem;
 import com.marketing.news.web.repositories.NewsItemRepository;
+import com.rometools.rome.feed.synd.SyndCategory;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,31 +36,55 @@ public class NewsFeedServiceImpl implements NewsFeedService {
 
             for (SyndEntry entry : syndFeed.getEntries()) {
                 NewsItem newsItem = new NewsItem();
-                System.out.println(entry);
-                /*if(dbCollection.findOne(data) != null){
-                    continue;
-                }*/
 
-                newsItem.setTitle(entry.getTitle());
-                newsItem.setLink(entry.getLink());
-                newsItem.setGuid(entry.getUri());
-                newsItem.setDescription(entry.getDescription().getValue());
-                newsItem.setAuthor(entry.getAuthor());
-                newsItem.setPublishedDate(entry.getPublishedDate());
+               // Not checking for duplicity of data. Can be done if needed
+                settingNewsItemDetails(entry, newsItem);
 
-                List<Element> foreignMarkup = entry.getForeignMarkup();
-                for( Element element :foreignMarkup) {
-                    if (element.getName() == "content") {
-                            newsItem.setMediaContent(element.getAttributeValue("url"));
-                    }
-                }
+                settingCategories(entry, newsItem);
+
+                settingForeignMarkup(entry, newsItem);
+
                 newsItemRepository.save(newsItem);
-                System.out.println("saving: " + newsItem.toString());
             }
             count = syndFeed.getEntries().size();
         } catch (FeedException | IOException exception) {
             LOG.error(exception.toString());
         }
         return count;
+    }
+
+    private void settingNewsItemDetails(SyndEntry entry, NewsItem newsItem) {
+        newsItem.setTitle(entry.getTitle());
+        newsItem.setLink(entry.getLink());
+        newsItem.setGuid(entry.getUri());
+        newsItem.setDescription(entry.getDescription().getValue());
+        newsItem.setAuthor(entry.getAuthor());
+        newsItem.setPublishedDate(entry.getPublishedDate());
+    }
+
+    private void settingCategories(SyndEntry entry, NewsItem newsItem) {
+        List<String> categories = new ArrayList<>();
+        for(SyndCategory category : entry.getCategories()){
+            categories.add(category.getName());
+        }
+        newsItem.setCategories(categories);
+    }
+
+    private void settingForeignMarkup(SyndEntry entry, NewsItem newsItem) {
+        List<Element> foreignMarkup = entry.getForeignMarkup();
+        for( Element element :foreignMarkup) {
+            String property = element.getName();
+            switch(property){
+                case "content" :
+                    newsItem.setMediaContent(element.getAttributeValue("url"));
+                    break;
+                case "link" :
+                    newsItem.setAtomLink(element.getAttributeValue("href"));
+                case "credit" :
+                    newsItem.setMediaCredit(element.getValue());
+                case "description" :
+                    newsItem.setMediaDescription(element.getValue());
+            }
+        }
     }
 }
