@@ -1,0 +1,17 @@
+.list-item-wrapper {
+    width: 100%;
+    //display: flex;
+    align-items: center;
+    position: relative;
+    border-top: 5px solid #eee;
+    min-height: 100px;
+    float: left;
+    &:first-child {
+      border-top: none;
+    }
+  
+    .list-item {
+      //position: absolute;
+      align-items: center;
+    }
+  }

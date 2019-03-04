@@ -1,0 +1,10 @@
+#Local MongoDB config
+#spring.data.mongodb.authentication-database=admin
+#spring.data.mongodb.username=root
+#spring.data.mongodb.password=root
+spring:
+  data:
+    mongodb:
+      database: news_feed_db
+      port: 27017
+      host: localhost
