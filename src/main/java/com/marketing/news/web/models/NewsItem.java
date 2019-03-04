@@ -27,6 +27,14 @@ public class NewsItem {
         return mediaDescription;
     }
 
+    public String getNewsItemId() {
+        return newsItemId;
+    }
+
+    public void setNewsItemId(String newsItemId) {
+        this.newsItemId = newsItemId;
+    }
+
     public void setMediaDescription(String mediaDescription) {
         this.mediaDescription = mediaDescription;
     }

@@ -12,6 +12,10 @@ public class NewsItemRatingCalculation {
     private int totalRating;
     private float averageRating;
 
+    public float getAverageRating() {
+        return averageRating;
+    }
+
     public void setAverageRating(float averageRating) {
         this.averageRating = averageRating;
     }
