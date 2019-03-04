@@ -55,14 +55,6 @@ public class NewsItem {
         this.categories = categories;
     }
 
-    public String getNewsItemId() {
-        return newsItemId;
-    }
-
-    public void setNewsItemId(String newsItemId) {
-        this.newsItemId = newsItemId;
-    }
-
     public String getMediaContent() {
         return mediaContent;
     }
