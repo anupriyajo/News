@@ -1,9 +1,14 @@
-FROM    openjdk:8u191-jre-alpine
-RUN     mkdir /app
-COPY    ./target/news-0.0.1-SNAPSHOT.jar /app
-WORKDIR /app
-EXPOSE  8080
-CMD     ["java", "-jar", "news-0.0.1-SNAPSHOT.jar "]
+FROM openjdk:8-alpine
 
-# docker build -t news-feed:latest .
-# docker run -d -p 8001:8080 news-feed:latest
+# Required for starting application up.
+RUN apk update && apk add bash
+
+RUN mkdir -p /opt/app
+ENV PROJECT_HOME /opt/app
+
+COPY target/news-0.0.1-SNAPSHOT.jar $PROJECT_HOME/news-0.0.1-SNAPSHOT.jar
+
+WORKDIR $PROJECT_HOME
+
+CMD ["java", "-Dspring.data.mongodb.uri=mongodb://newsapp-mongo:27017/news-db", "-jar", "./news-0.0.1-SNAPSHOT.jar"]
+

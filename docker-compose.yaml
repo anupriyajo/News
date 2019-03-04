@@ -4,19 +4,19 @@ services:
   api:
     build: .
     restart: always
-    container_name: news-feed
+    container_name: news-api
     ports:
-      - 8001: 8080
-    working_dir: /app
+      - 9000:8080
+    working_dir: /opt/app
     depends_on:
-      - database
+      - mongo
 
-  database:
-    image: mongo:latest
-    container_name: news-feed-mongodb
-    ports:  # for demo/debug purpose only
-      - 27018:27017
+  mongo:
+    image: mongo
+    container_name: newsapp-mongo
+    #ports:
+    #  - 27018:27017
     volumes:
-      - $HOME/data/news-feed-mongodb-data: ./data/db
-      - $HOME/data/news-feed-mongodb-bkp: ./data/bkp
+      - ./data/newsapp-mongo-data:/data/db
+      - ./data/newsapp-mongo-bkp:/data/bkp
     restart: always

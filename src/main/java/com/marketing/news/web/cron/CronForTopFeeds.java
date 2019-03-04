@@ -59,7 +59,7 @@ public class CronForTopFeeds {
         List<String> topFeedIds = new ArrayList<>();
         List<NewsItemRatingCalculation> newsItemRatingCalculations =
                 newsItemRatingCalculationRepository.findAll(new Sort(Sort.Direction.DESC, "averageRating"));
-        for (int i = 0; i < count ; i++ ) {
+        for (int i = 0; i < count && i < newsItemRatingCalculations.size(); i++ ) {
             topFeedIds.add(newsItemRatingCalculations.get(i).getNewsItemId());
         }
         return topFeedIds;
