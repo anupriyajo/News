@@ -10,10 +10,12 @@ export const SAVE_RATING = 'SAVE_RATING'
 export const SAVE_RATING_SUCCESS = 'SAVE_RATING_SUCCESS'
 //export const SAVE_RATING_FAILURE = 'SAVE_RATING_FAILURE'
 
+const baseUri = 'http://localhost:9000';
+
 export function saveRating({newsId, rating}) {
   return dispatch => {
     dispatch(inititateSaveRating())
-    return fetch(`http://192.168.0.4:8080/api/news/${newsId}/rating?rating=${rating}`,{
+    return fetch(`${baseUri}/api/news/${newsId}/rating?rating=${rating}`,{
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +66,7 @@ function receiveNews(json) {
 export function fetchNews() {
   return dispatch => {
     dispatch(requestNews())
-    return fetch(`http://192.168.0.4:8080/api/news`)
+    return fetch(`${baseUri}/api/news`)
       .then(response => response.json())
       .then(json => dispatch(receiveNews(json)))
   }
@@ -87,7 +89,7 @@ function receivePopNews(json) {
 export function fetchPopNews() {
   return dispatch => {
     dispatch(requestPopNews())
-    return fetch(`http://192.168.0.4:8080/api/news/popular`)
+    return fetch(`${baseUri}/api/news/popular`)
       .then(response => response.json())
       .then(json => dispatch(receivePopNews(json)))
   }

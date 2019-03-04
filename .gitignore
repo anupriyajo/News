@@ -56,14 +56,14 @@ hs_err_pid*
 
 # dependencies
 news-app/node_modules
-/.pnp
+news-app/.pnp
 .pnp.js
 
 # testing
-/coverage
+news-app/coverage
 
 # production
-/build
+news-app/build
 
 # misc
 .DS_Store

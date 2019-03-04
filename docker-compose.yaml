@@ -1,6 +1,16 @@
 version: '3.1'
 
 services:
+  ui:
+    build: news-app
+    restart: always
+    container_name: news-ui
+    ports:
+      - 3000:8080
+    working_dir: /opt/www
+    depends_on:
+      - api
+
   api:
     build: news-api
     restart: always
